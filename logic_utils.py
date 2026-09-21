@@ -65,6 +65,24 @@ def check_guess(guess, secret):
     return "Too Low", "📈 Go HIGHER!"
 
 
+# Awarded for a win on the first guess; each later guess is worth less.
+MAX_WIN_POINTS = 100
+POINTS_LOST_PER_ATTEMPT = 10
+MIN_WIN_POINTS = 10
+WRONG_GUESS_PENALTY = 5
+
+
 def update_score(current_score: int, outcome: str, attempt_number: int):
-    """Update score based on outcome and attempt number."""
-    raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
+    """
+    Update score based on outcome and attempt number.
+
+    attempt_number is 1-based: 1 means this was the player's first guess.
+    """
+    if outcome == "Win":
+        points = MAX_WIN_POINTS - POINTS_LOST_PER_ATTEMPT * attempt_number
+        return current_score + max(MIN_WIN_POINTS, points)
+
+    if outcome in ("Too High", "Too Low"):
+        return max(0, current_score - WRONG_GUESS_PENALTY)
+
+    return current_score
