@@ -116,17 +116,68 @@ no tier can be made mathematically impossible.
 
 ## 📸 Demo Walkthrough
 
-Describe your fixed game in numbered steps so a reader can follow along without
-watching a video:
+The example below uses **Easy** so the run is short. The secret is random each
+game, so open **Developer Debug Info** if you want to follow along with the
+exact numbers shown here (this run had a secret of **12**).
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. **Start the app.** Run `python -m streamlit run app.py` in the project
+   folder. Streamlit opens <http://localhost:8501> in your browser.
+
+2. **Pick a difficulty.** In the left sidebar under **Settings**, choose
+   **Easy**. The sidebar updates to `Range: 1 to 20` and
+   `Attempts allowed: 6`, and the banner above the guess box agrees:
+   `Guess a number between 1 and 20. Attempts left: 6`.
+
+3. **Peek at the secret (optional).** Expand **Developer Debug Info** to see
+   the secret number, attempts used, score, difficulty and guess history. This
+   is how you can confirm the hints are telling the truth.
+
+4. **Make your first guess.** Type `10` into **Enter your guess** and click
+   **Submit Guess 🚀**. The secret is 12, so the hint reads **📈 Go HIGHER!**
+   and the banner drops to `Attempts left: 5`. The guess box clears itself,
+   ready for the next guess.
+
+5. **Follow the hint upward.** Guess `15`. That overshoots, so the hint flips
+   to **📉 Go LOWER!** and attempts left falls to `4`. You now know the answer
+   is between 11 and 14.
+
+6. **Win.** Guess `12`. Balloons fly and a green banner reads
+   `You won! The secret was 12. Final score: 70` — 70 because a win on the
+   third attempt scores `100 − 10 × 3`. The guess box is disabled, so you
+   cannot keep guessing after the game ends.
+
+7. **Start over.** Click **New Game 🔁**. A new secret is drawn from the *same*
+   difficulty's range, and attempts, score and history all reset. Attempts left
+   returns to `6` and the game is immediately playable again.
+
+8. **Try losing.** Start a fresh Easy game and guess `1` six times. After the
+   sixth, a red banner reads
+   `Out of attempts! The secret was 12. Score: 0`, and guessing is locked.
+   Click **New Game 🔁** and it recovers straight away.
+
+9. **Confirm bad input is free.** Note the attempts-left number, then submit
+   `abc`. You get `'abc' is not a whole number.` and the counter does **not**
+   move. Submit `99` on Easy and you get
+   `Guess must be between 1 and 20.` — also free. Only a real, in-range guess
+   costs an attempt.
+
+10. **Switch difficulty mid-game.** Change the sidebar to **Hard**. Because the
+    secret has to come from the new range, a fresh game starts automatically:
+    the sidebar reads `Range: 1 to 200` and `Attempts allowed: 8`, and the
+    debug panel shows a new secret inside that range.
+
+11. **Turn the hints off.** Untick **Show hint** and guess again. The game still
+    tracks attempts and score, but no higher/lower message appears — useful for
+    a harder run.
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, describe the Enhanced UI changes here — a screenshot is optional]
+None attempted. This submission covers the core project only: finding and
+fixing the bugs, refactoring the logic into `logic_utils.py`, and getting the
+test suite passing.
+
+Because no stretch challenges were attempted, `ai_interactions.md` is
+intentionally left blank — it is a stretch-features-only log and is not
+required for the core project.
