@@ -31,6 +31,12 @@ ATTEMPT_LIMITS = {
     "Hard": 8,
 }
 
+# Awarded for a win on the first guess; each later guess is worth less.
+MAX_WIN_POINTS = 100
+POINTS_LOST_PER_ATTEMPT = 10
+MIN_WIN_POINTS = 10
+WRONG_GUESS_PENALTY = 5
+
 
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
@@ -92,13 +98,6 @@ def check_guess(guess, secret):
         return "Too High", "📉 Go LOWER!"
 
     return "Too Low", "📈 Go HIGHER!"
-
-
-# Awarded for a win on the first guess; each later guess is worth less.
-MAX_WIN_POINTS = 100
-POINTS_LOST_PER_ATTEMPT = 10
-MIN_WIN_POINTS = 10
-WRONG_GUESS_PENALTY = 5
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
