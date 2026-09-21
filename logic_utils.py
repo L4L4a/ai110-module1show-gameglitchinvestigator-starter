@@ -4,6 +4,12 @@ This module deliberately imports nothing from Streamlit so that every
 function here can be called directly from tests.
 """
 
+import re
+
+# An optional sign followed by ASCII digits. Using this instead of a bare
+# int() call keeps non-ASCII decimal digits (e.g. "\u0663") out of the game.
+_WHOLE_NUMBER_RE = re.compile(r"^[+-]?[0-9]+$")
+
 # (low, high) inclusive guessing range per difficulty.
 #
 # The range widens as difficulty increases. "Hard" used to be 1-50, which
@@ -36,13 +42,36 @@ def get_attempt_limit(difficulty: str):
     return ATTEMPT_LIMITS.get(difficulty, ATTEMPT_LIMITS[DEFAULT_DIFFICULTY])
 
 
-def parse_guess(raw: str):
+def parse_guess(raw: str, low=None, high=None):
     """
     Parse user input into an int guess.
 
+    When low and high are given, the guess must fall inside that
+    inclusive range to be accepted.
+
     Returns: (ok: bool, guess_int: int | None, error_message: str | None)
     """
-    raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
+    if raw is None:
+        return False, None, "Enter a guess."
+
+    text = raw.strip()
+    if text == "":
+        return False, None, "Enter a guess."
+
+    if not _WHOLE_NUMBER_RE.match(text):
+        if "." in text:
+            return False, None, "Enter a whole number, not a decimal."
+        return False, None, f"'{text}' is not a whole number."
+
+    value = int(text)
+
+    if low is not None and value < low:
+        return False, None, f"Guess must be between {low} and {high}."
+
+    if high is not None and value > high:
+        return False, None, f"Guess must be between {low} and {high}."
+
+    return True, value, None
 
 
 def check_guess(guess, secret):
