@@ -16,9 +16,10 @@ Two bugs stood out immediately:
   nothing could bring it back. The only recovery was restarting the Streamlit
   server.
 
-Investigating those two led to 17 distinct bugs in total: 13 in `app.py`, and 4 in
-`logic_utils.py` and the test setup. Notably, the README's hint that "the secret number changes
-every time you click Submit" turned out to be a red herring — the secret was
+Investigating those two led to 17 distinct bugs in total: 13 in `app.py`, and 4
+in `logic_utils.py` and the test setup. Notably, the README's hint that "the
+secret number changes every time you click Submit" turned out to be a red
+herring — the secret was
 stored correctly in `st.session_state` and never changed. It only *behaved* as
 if it changed, because on alternating attempts it was converted to a string and
 compared lexicographically.

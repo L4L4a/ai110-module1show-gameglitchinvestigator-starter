@@ -16,12 +16,11 @@ claiming it was production-ready. It was unplayable:
 - `logic_utils.py` was four `NotImplementedError` stubs, and all three tests
   failed.
 
-**17 bugs** were found and fixed — 13 in `app.py`, and 4 in
-`logic_utils.py` and the test setup. There
-was not a single syntax error in the project; every defect was a logic, state or
-runtime bug in code that imported and served a working web page. Full writeup,
-including reproduction steps for each one, is in
-[`reflection.md`](reflection.md).
+**17 bugs** were found and fixed — 13 in `app.py`, and 4 in `logic_utils.py`
+and the test setup. There was not a single syntax error in the project; every
+defect was a logic, state or runtime bug in code that imported and served a
+working web page. Full writeup, including reproduction steps for each one, is
+in [`reflection.md`](reflection.md).
 
 ## 🛠️ Setup
 
