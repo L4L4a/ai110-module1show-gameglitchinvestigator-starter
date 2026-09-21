@@ -96,7 +96,7 @@ python3 -m pytest
 ```
 ============================= test session starts ==============================
 platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0
-rootdir: /Users/elviskenneth/Downloads/ai110-module1show-gameglitchinvestigator-starter
+rootdir: /path/to/ai110-module1show-gameglitchinvestigator-starter
 collected 41 items
 
 tests/test_game_logic.py .........................................       [100%]
